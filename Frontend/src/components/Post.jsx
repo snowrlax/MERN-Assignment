@@ -40,7 +40,7 @@ const Post = ({
                 </div>
                 {subtitle ? <p className="card-text mb-1">{subtitle}</p> : ""}
                 {description ? <p className="card-text">{description}</p> : ""}
-                {buttonText ? <a href="#" className="btn btn-primary">{buttonText}</a> : ""}
+                {buttonText ? <a href="#" className="btn btn-primary w-100">{buttonText}</a> : ""}
 
                 <div className="blog-footer">
                     <div className="blog-avatar"><img src={userImg} /></div>
