@@ -4,8 +4,7 @@ import Link from "./Link"
 
 const FeedsTab = () => {
 
-
-    return <div className="">
+    return <div className="mb-3">
         <div className="d-flex justify-content-between align-items-center mb-1 d-block d-md-none feeds-tab-sm">
             <h4>Posts(368)</h4>
             <button className="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">

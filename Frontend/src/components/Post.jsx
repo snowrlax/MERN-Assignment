@@ -1,4 +1,4 @@
-import { FaClock, FaShare } from "react-icons/fa";
+import { FaShare } from "react-icons/fa";
 const Post = ({
     id,
     imageSrc,
@@ -13,7 +13,7 @@ const Post = ({
     views
 }) => {
 
-    return <div className="" style={{ width: "100%" }}>
+    return <div className="" style={{ width: "100%", padding: 0 }}>
         <div className="card post mb-3">
 
             {imageSrc ? <img src={imageSrc} className="card-img-top custom-card-img" alt={title} style={{ objectFit: "cover", width: "100%" }} /> : ""}
