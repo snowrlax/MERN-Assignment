@@ -1,7 +1,6 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Desktop from './components/Desktop'
 import LoggedInUser from './components/LoggedInUser'
-import Login from './components/Login'
 import './App.css'
 import React from 'react'
 

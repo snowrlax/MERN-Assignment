@@ -1,3 +1,4 @@
+import { FaClock, FaShare } from "react-icons/fa";
 const Post = ({
     id,
     imageSrc,
@@ -15,7 +16,7 @@ const Post = ({
     return <div className="" style={{ width: "100%" }}>
         <div className="card post mb-3">
 
-            {imageSrc ? <img src={imageSrc} className="card-img-top" alt={title} style={{ objectFit: "cover" }} /> : ""}
+            {imageSrc ? <img src={imageSrc} className="card-img-top custom-card-img" alt={title} style={{ objectFit: "cover", width: "100%" }} /> : ""}
 
             <div className="card-body">
                 <p className="card-text">{postType}</p>
@@ -37,25 +38,26 @@ const Post = ({
                         </div>
                     </div>
                 </div>
-
-
-
-
-                {subtitle ? <p className="card-text">{subtitle}</p> : ""}
+                {subtitle ? <p className="card-text mb-1">{subtitle}</p> : ""}
                 {description ? <p className="card-text">{description}</p> : ""}
                 {buttonText ? <a href="#" className="btn btn-primary">{buttonText}</a> : ""}
 
-                <div className="user row">
-                    <img className="col-9" src={userImg} alt={userName} style={{ objectFit: "cover", height: "48px", width: "48px", borderRadius: "50%" }} />
-                    <p className="col-2" style={{ fontSize: "18px" }}>{userName}</p>
-                    <button className="btn btn-primary share" style={{ height: "48px", width: "48px" }}>
-                        svg
-                    </button>
+                <div className="blog-footer">
+                    <div className="blog-avatar"><img src={userImg} /></div>
+                    <div>
+                        <span className="blog-author">{userName}</span>
+                        <div className="blog-post">
+                            <span>{views} views</span>
+                        </div>
+                    </div>
+                    <button className="btn btn-sm-light"><FaShare /> Share</button>
                 </div>
+
             </div>
         </div>
 
     </div>
+
 }
 
 export default Post
