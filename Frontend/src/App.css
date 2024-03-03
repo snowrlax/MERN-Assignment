@@ -1,0 +1,42 @@
+/* Navbar Styling */
+.custom-navbar-style {
+  height: 72px;
+}
+
+.custom-navbar-style-sm {
+  height: 24px;
+}
+
+#navSvg {
+  right: 0;
+}
+
+/* feeds Tab */
+.feeds-tab-sm{
+  padding: 1rem;
+}
+
+.custom-search {
+  background: #F2F2F2;
+  border: none;
+  border-radius: 50%;
+}
+
+.custom-form>input {
+  border-radius: none;
+}
+
+/* Custom CSS for specific screen sizes */
+@media (min-width: 576px) {
+  .custom-img-height {
+    height: 236px;
+    /* Adjust height for small screens */
+  }
+}
+
+@media (min-width: 768px) {
+  .custom-img-height {
+    height: 440px;
+    /* Adjust height for medium screens */
+  }
+}
