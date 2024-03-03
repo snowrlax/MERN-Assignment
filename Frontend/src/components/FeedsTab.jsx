@@ -13,7 +13,7 @@ const FeedsTab = () => {
 
         <ul className="nav nav-tabs d-none d-md-block">
         {feedTabData.map(data => (
-            <Link key={data.id} title={data.title} />
+            <Link key={data.id} title={data.title} className={data.className} />
         ))}
 
         <button className="btn btn-secondary dropdown-toggle" role="dropdown" data-bs-toggle="dropdown" aria-expanded="false">Write a Post</button>

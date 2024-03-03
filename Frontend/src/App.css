@@ -26,6 +26,7 @@
   border-radius: none;
 }
 
+
 /* Custom CSS for specific screen sizes */
 @media (min-width: 576px) {
   .custom-img-height {

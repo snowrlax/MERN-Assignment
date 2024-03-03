@@ -1,5 +1,6 @@
 export const feedTabData = [{
     id: 1,
+    className: "active",
     title: "All Posts(32)"
 }, {
     id: 2,
