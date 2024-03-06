@@ -13,9 +13,9 @@ const Navbar = () => {
             </div>
         </nav>
         <nav className="navbar navbar-expand-lg bg-body-tertiary custom-navbar-style d-none d-sm-block">
-            <div className="container-fluid row">
+            <div className="container-fluid row d-flex justify-content-center">
                 <div className="col-3">
-                    <a className="navbar-brand" href="#">
+                    <a className="navbar-brand align-self-center" href="#">
                         <svg width="163" height="24" viewBox="0 0 163 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <g clipPath="url(#clip0_1_786)">
                                 <path d="M96.7952 15.498C98.7164 15.498 100.274 13.9393 100.274 12.0165C100.274 10.0938 98.7164 8.53503 96.7952 8.53503C94.8739 8.53503 93.3164 10.0938 93.3164 12.0165C93.3164 13.9393 94.8739 15.498 96.7952 15.498Z" fill="#CDDC36" />
@@ -52,7 +52,7 @@ const Navbar = () => {
                     </a>
                 </div>
 
-                <form className="d-flex col-6">
+                <form className="d-flex col-6 ">
                     <input
                         className="form-control me-2 custom-search"
                         type="search"
@@ -61,7 +61,7 @@ const Navbar = () => {
                         style={{ backgroundColor: "#F2F2F2", border: "none", borderRadius: "30px" }} />
                 </form>
 
-                <p className="col-3" >
+                <p className="col-3 align-self-center" style={{margin: 0}}>
                     Create Account.
                     <SignupModal />
                 </p>

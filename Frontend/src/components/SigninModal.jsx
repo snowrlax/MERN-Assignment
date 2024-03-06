@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
-import SignupForm from './SignupForm';
 import SocialComponent from './SocialComponent';
+import SigninForm from './SigninForm';
 
-const SignupModal = (props) => {
+const SigninModal = (props) => {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -23,10 +23,10 @@ const SignupModal = (props) => {
       >
 
         <Modal.Header closeButton className='col-12'>
-          <Modal.Title>Signup</Modal.Title>
+          <Modal.Title>Signin</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <SignupForm />
+          <SigninForm />
         </Modal.Body>
         <Modal.Footer>
           <SocialComponent buttonText={"Continue"} />
@@ -37,4 +37,4 @@ const SignupModal = (props) => {
   );
 }
 
-export default SignupModal;
+export default SigninModal;
