@@ -1,0 +1,135 @@
+const express = require('express');
+
+const router = express.Router();
+const zod = require("zod");
+const { Post, User } = require("../db");
+const jwt = require("jsonwebtoken");
+const { JWT_SECRET } = require("../config");
+const { authMiddleware } = require("../middleware");
+
+router.get('/', async (req, res) => {
+    try {
+        const posts = await Post.find({})
+        res.json({
+            posts
+        })
+    } catch (e) {
+        console.error('cannot get the posts from db')
+        res.status(500).json({
+            msg: 'cannot get the posts from db'
+        })
+    }
+})
+
+const newPostSchema = zod.object({
+    content: zod.string(),
+    contentImg: zod.string()
+})
+// Create a new post (only the ones that are authenticated will be able to create a post)
+router.post('/create', authMiddleware, async (req, res) => {
+    try {
+        // validate the body with zod before inserting it into the db
+        const { success } = newPostSchema.safeParse(req.body)
+
+        if (!success) {
+            return res.status(411).json({
+                message: "Email already taken / Incorrect inputs"
+            })
+        }
+
+        const newPost = await Post.create({
+            user: req.userId,
+            content: req.body.content,
+            contentImg: req.body.contentImg
+        });
+
+        res.status(201).json({
+            msg: "post created successfully!",
+            newPost
+        });
+
+    } catch (error) {
+
+        res.status(500).json({ error: 'An error occurred while creating the post.' });
+    }
+});
+
+const updatePostSchema = zod.object({
+    content: zod.string().optional(),
+    contentImg: zod.string().optional()
+})
+
+// Update an existing post
+router.put('/myposts/:postId', authMiddleware, async (req, res) => {
+    const { postId } = req.params;
+    
+    const userId = req.userId
+    try {
+        const post = await Post.find({
+            _id: postId
+        });
+
+        // Check if the post exists
+        if (!post) {
+            return res.status(404).json({ error: 'Post not found.' });
+        }
+
+        // Check if the user owns the post
+        if (post.user.toString() !== userId) {
+            return res.status(403).json({ error: 'You are not authorized to update this post.' });
+        }
+
+        // validate the body with zod before updating it into the db
+        const { success } = newPostSchema.safeParse(req.body)
+
+        if (!success) {
+            return res.status(411).json({
+                message: "Incorrect inputs!"
+            })
+        }
+
+        // User is authorized to update the post
+        const updatedPost = await Post.updateOne(req.body, {
+            postId
+        })
+        res.json({
+            msg: "Updated post successfully!",
+            updatedPost
+        });
+
+    } catch (error) {
+        res.status(500).json({ error: 'An error occurred while updating the post.' });
+    }
+});
+
+// Delete a post
+router.delete('/delete/:postId', authMiddleware, async (req, res) => {
+    const { postId } = req.params;
+    const userId = req.userId;
+    try {
+        const post = await Post.find({
+            _id: postId
+        });
+
+        // Check if the post exists
+        if (!post) {
+            return res.status(404).json({ error: 'Post not found.' });
+        }
+
+        // Check if the user owns the post
+        if (post.user.toString() !== userId) {
+            return res.status(403).json({ error: 'You are not authorized to delete this post.' });
+        }
+        const deletedPost = await Post.deleteOne({
+            _id: postId
+        });
+        res.json({
+            msg: "post deleted!",
+            deletedPost
+        });
+    } catch (error) {
+        res.status(500).json({ error: 'An error occurred while deleting the post.' });
+    }
+});
+
+module.exports = router;
