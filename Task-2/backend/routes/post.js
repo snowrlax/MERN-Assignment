@@ -7,7 +7,7 @@ const jwt = require("jsonwebtoken");
 const { JWT_SECRET } = require("../config");
 const { authMiddleware } = require("../middleware");
 
-router.get('/', async (req, res) => {
+router.get('/posts', async (req, res) => {
     try {
         const posts = await Post.find({})
         res.json({
