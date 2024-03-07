@@ -106,12 +106,13 @@ router.put("/", authMiddleware, async (req, res) => {
         })
     }
 
-    await User.updateOne(req.body, {
-        id: req.userId
-    })
+    const updatedUser = await User.findByIdAndUpdate({
+        _id: req.userId
+    }, req.body)
 
     res.json({
-        message: "Updated successfully"
+        message: "Updated successfully",
+        updatedUser
     })
 })
 

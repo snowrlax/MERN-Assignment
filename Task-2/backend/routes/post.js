@@ -62,10 +62,10 @@ const updatePostSchema = zod.object({
 // Update an existing post
 router.put('/myposts/:postId', authMiddleware, async (req, res) => {
     const { postId } = req.params;
-    
+
     const userId = req.userId
     try {
-        const post = await Post.find({
+        const post = await Post.findOne({
             _id: postId
         });
 
@@ -80,7 +80,7 @@ router.put('/myposts/:postId', authMiddleware, async (req, res) => {
         }
 
         // validate the body with zod before updating it into the db
-        const { success } = newPostSchema.safeParse(req.body)
+        const { success } = updatePostSchema.safeParse(req.body)
 
         if (!success) {
             return res.status(411).json({
@@ -89,9 +89,11 @@ router.put('/myposts/:postId', authMiddleware, async (req, res) => {
         }
 
         // User is authorized to update the post
-        const updatedPost = await Post.updateOne(req.body, {
-            postId
-        })
+        const updatedPost = await Post.findByIdAndUpdate({
+            _id: postId
+        }, req.body)
+
+
         res.json({
             msg: "Updated post successfully!",
             updatedPost
@@ -129,6 +131,37 @@ router.delete('/delete/:postId', authMiddleware, async (req, res) => {
         });
     } catch (error) {
         res.status(500).json({ error: 'An error occurred while deleting the post.' });
+    }
+});
+
+// like a post
+router.post('/like/:postId', authMiddleware, async (req, res) => {
+    const { postId } = req.params;
+    const userId = req.userId;
+
+    try {
+        const post = await Post.find({
+            _id: postId
+        });
+
+        // Check if the post exists
+        if (!post) {
+            return res.status(404).json({ error: 'Post not found.' });
+        }
+
+        // Find the post by ID and update its likes array
+        const updatedPost = await Post.findByIdAndUpdate(
+            postId,
+            { $addToSet: { likes: userId } }, // Add userId to likes array if not already present
+            { new: true } // Return the updated document
+        );
+
+        res.status(200).json({
+            msg: "liked post!",
+            updatedPost
+        });
+    } catch (error) {
+        res.status(500).json({ error: 'An error occurred while liking the post.' });
     }
 });
 
