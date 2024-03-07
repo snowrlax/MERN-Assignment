@@ -71,18 +71,12 @@ router.post("/signin", async (req, res) => {
         }
 
         const user = await User.findOne({
-            email
+            email,
+            password
         });
 
         if (!user) {
             return res.status(404).json({ error: 'User not found.' });
-        }
-
-        // Compare passwords
-        const isMatch = await user.comparePassword(password);
-
-        if (!isMatch) {
-            return res.status(401).json({ error: 'Incorrect password.' });
         }
 
         if (user) {

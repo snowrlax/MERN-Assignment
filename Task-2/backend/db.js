@@ -34,31 +34,6 @@ const userSchema = new mongoose.Schema({
     }
 });
 
-// Hash password before saving user
-userSchema.pre('save', async function (next) {
-  if (!this.isModified('password')) {
-    return next();
-  }
-  
-  try {
-    const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(this.password, salt);
-    this.password = hashedPassword;
-    next();
-  } catch (error) {
-    return next(error);
-  }
-});
-
-// compare password
-userSchema.methods.comparePassword = async function (password) {
-  try {
-    return await bcrypt.compare(password, this.password);
-  } catch (error) {
-    throw new Error(error);
-  }
-};
-
 // Post schema
 const postSchema = new mongoose.Schema({
     user: {
