@@ -1,7 +1,6 @@
-import SignupModal from "./SignupModal"
+import { useContext, useState } from "react"
 
-
-const Navbar = () => {
+const Navbar = ({ isLoggedIn, children }) => {    
     return <>
         <nav className="nav navbar navbar-expand-lg bg-body-tertiary custom-navbar-style-sm d-block d-sm-none">
             <div className="container-fluid ">
@@ -62,10 +61,8 @@ const Navbar = () => {
                 </form>
 
                 <p className="col-3 align-self-center" style={{margin: 0}}>
-                    Create Account.
-                    <SignupModal />
+                    { children }
                 </p>
-
 
             </div>
         </nav>
