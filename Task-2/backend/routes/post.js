@@ -109,7 +109,7 @@ router.delete('/delete/:postId', authMiddleware, async (req, res) => {
     const { postId } = req.params;
     const userId = req.userId;
     try {
-        const post = await Post.find({
+        const post = await Post.findOne({
             _id: postId
         });
 
