@@ -1,16 +1,19 @@
-const Home = () => {
-    return <div class="container mx-auto px-4 py-6">
+import Navbar from "./Navbar"
+import PostCard from "./PostCard"
+
+const HomePage = () => {
+    return <div className="container mx-auto px-4 py-6">
 
         <Navbar />
 
-        <div class="mt-8 flex justify-center items center">
-            <div class="grid grid-cols md:w-3/6 gap-6">
+        <div className="mt-8 flex justify-center items center">
+            <div className="grid grid-cols w-5/6 md:w-3/6 lg:w-2/6 gap-6">
 
-                <Card />
+                <PostCard />
                 
             </div>
         </div>
     </div>
 }
 
-export default Home
+export default HomePage
