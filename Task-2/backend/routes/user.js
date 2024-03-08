@@ -7,6 +7,7 @@ const { User } = require("../db");
 const jwt = require("jsonwebtoken");
 const { JWT_SECRET } = require("../config");
 const { authMiddleware } = require("../middleware");
+const bcrypt = require("bcrypt");
 
 
 const signupBody = zod.object({
@@ -71,8 +72,7 @@ router.post("/signin", async (req, res) => {
         }
 
         const user = await User.findOne({
-            email,
-            password
+            email
         });
 
         if (!user) {
