@@ -1,4 +1,8 @@
+import { useNavigate } from "react-router-dom"
+
 const Signin = () => {
+    const navigate = useNavigate()
+
     return <div className="flex items-center justify-center h-screen">
         <div className="max-w-md bg-white rounded-lg shadow-md p-8">
             <h2 className="text-2xl font-semibold text-gray-800 mb-6">Sign In</h2>
@@ -13,7 +17,9 @@ const Signin = () => {
                 </div>
                 <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600">Sign In</button>
             </form>
-            <p class="mt-4 text-sm text-gray-600">Don't have an account? <a href="#" class="text-blue-500 font-medium">Sign Up</a></p>
+            <p className="mt-4 text-sm text-gray-600">Don't have an account? <a onClick={() => {
+                navigate('/signup')
+            }} className="text-blue-500 font-medium hover:cursor-pointer">Sign Up</a></p>
         </div>
     </div>
 }

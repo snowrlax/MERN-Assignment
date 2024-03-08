@@ -43,9 +43,18 @@ router.post("/signup", async (req, res) => {
             lastName: req.body.lastName,
         })
 
-        res.json({
-            message: "User created successfully"
-        })
+        if (user) {
+            const token = jwt.sign({
+                userId: user._id
+            }, JWT_SECRET);
+
+            res.json({
+                message: "User created successfully",
+                token
+            })
+        }
+
+
     } catch (e) {
         return res.status(500).json({
             error: 'An error occurred while creating the user.',
@@ -119,7 +128,7 @@ const updateBody = zod.object({
 
 router.put("/", authMiddleware, async (req, res) => {
     const { success } = updateBody.safeParse(req.body)
-    const {password, firstName, lastName} = req.body
+    const { password, firstName, lastName } = req.body
     if (!success) {
         res.status(411).json({
             message: "Error while updating information"
@@ -183,6 +192,41 @@ router.get("/search", async (req, res) => {
     }
 
 })
+
+// me endpoint
+router.get('/me', async (req, res) => {
+    // Get the token from the request headers or query parameters or cookies or wherever you store it
+    const token = req.headers.authorization?.split(' ')[1]; // Assuming the token is sent in the 'Authorization' header
+  
+    if (!token) {
+      return res.status(401).json({ error: 'Unauthorized: No token provided' });
+    }
+  
+    try {
+      // Verify the token
+      const decoded = jwt.verify(token, JWT_SECRET);
+  
+      // Check if the user exists in the database
+      const user = await User.findById(decoded.userId);
+  
+      if (!user) {
+        return res.status(404).json({ error: 'User not found' });
+      }
+  
+      // User is authenticated
+      res.json({
+        isLoggedIn: true,
+        userDetails: {
+          id: user._id,
+          firstName: user.firstName,
+          email: user.email,
+        }
+      });
+    } catch (error) {
+      console.error(error);
+      res.status(401).json({ error: 'Unauthorized: Invalid token' });
+    }
+  });
 
 
 module.exports = router;
