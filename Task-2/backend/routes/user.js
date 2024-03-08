@@ -79,6 +79,14 @@ router.post("/signin", async (req, res) => {
             return res.status(404).json({ error: 'User not found.' });
         }
 
+        // Compare passwords
+        const isMatch = await user.comparePassword(password);
+
+        if (!isMatch) {
+            return res.status(401).json({ error: 'Incorrect password.' });
+        }
+
+
         if (user) {
             const token = jwt.sign({
                 userId: user._id
@@ -111,15 +119,31 @@ const updateBody = zod.object({
 
 router.put("/", authMiddleware, async (req, res) => {
     const { success } = updateBody.safeParse(req.body)
+    const {password, firstName, lastName} = req.body
     if (!success) {
         res.status(411).json({
             message: "Error while updating information"
         })
     }
 
+    const newDetails = {
+        password,
+        firstName,
+        lastName
+    }
+
+    if (req.body.password) {
+        // Hash the new password using bcrypt
+        const hashedPassword = await bcrypt.hash(req.body.password, 10);
+
+        newDetails.password = hashedPassword
+        // // Update the user's password in the database
+        // await User.findByIdAndUpdate(userId, { password: hashedPassword });
+    }
+
     const updatedUser = await User.findByIdAndUpdate({
         _id: req.userId
-    }, req.body)
+    }, newDetails)
 
     res.json({
         message: "Updated successfully",
