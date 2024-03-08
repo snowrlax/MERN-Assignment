@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import DashboardPost from './DashboardPost';
 
 const Dashboard = () => {
   const [posts, setPosts] = useState([]);
-
+  const navigate = useNavigate()
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -37,16 +39,7 @@ const Dashboard = () => {
       {/* Posts section */}
       <div className="space-y-4">
         {posts.map(post => (
-          <div key={post.id} className="bg-white rounded-lg shadow-md p-4 flex justify-between items-center">
-            <div>
-              <h3 className="text-lg font-semibold">{post.title}</h3>
-              <p className="text-gray-600">{post.content}</p>
-            </div>
-            <div>
-              <button className="bg-blue-500 text-white px-4 py-2 rounded-md mr-2 hover:bg-blue-600 focus:outline-none focus:bg-blue-600">Edit</button>
-              <button onClick={() => handleDeletePost(post.id)} className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 focus:outline-none focus:bg-red-600">Delete</button>
-            </div>
-          </div>
+          <DashboardPost key={post._id} postId={post._id} content={post.content} />
         ))}
       </div>
     </div>

@@ -12,6 +12,7 @@ const Navbar = ({ isLoggedIn, user }) => {
         {isLoggedIn ? (
           <>
             <div className="flex items-center">
+
               <img src={user.profilePicture} alt="Profile" className="w-8 h-8 rounded-full mr-2" />
               <p className="text-gray-800 text-lg font-semibold">{user.firstName}</p>
               <button onClick={() => {

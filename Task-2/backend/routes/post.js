@@ -135,7 +135,6 @@ router.delete('/delete/:postId', authMiddleware, async (req, res) => {
         const post = await Post.findOne({
             _id: postId
         });
-        console.log(post)
         // Check if the post exists
         if (!post) {
             return res.status(404).json({ error: 'Post not found.' });
