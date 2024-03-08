@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
 import DashboardPost from './DashboardPost';
 
 const Dashboard = () => {
   const [posts, setPosts] = useState([]);
-  const navigate = useNavigate()
 
   const fetchData = async () => {
     try {
