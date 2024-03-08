@@ -10,7 +10,10 @@ const { authMiddleware } = require("../middleware");
 // get all posts
 router.get('/posts', async (req, res) => {
     try {
-        const posts = await Post.find({}).populate('user')
+        const posts = await Post.find({}).populate({
+            path: "user",
+            select: "firstName email"
+        })
         res.json({
             posts
         })

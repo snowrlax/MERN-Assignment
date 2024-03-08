@@ -10,7 +10,7 @@ const Signup = () => {
     const navigate = useNavigate();
 
     return <div className="flex items-center justify-center h-screen">
-        <div className="max-w-md bg-white rounded-lg shadow-md p-8">
+        <div className="max-w-md bg-stone-100 rounded-lg shadow-md p-8">
             <h2 className="text-2xl font-semibold text-gray-800 mb-6">Sign Up</h2>
             <div>
                 <div className="mb-4">

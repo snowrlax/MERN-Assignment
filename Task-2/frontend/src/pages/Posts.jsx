@@ -6,12 +6,19 @@ const Posts = ({ isLoggedIn }) => {
 
     const [posts, setPosts] = useState([])
 
-    useEffect(() => {
-        axios.get("http://localhost:3000/api/v1/post/posts")
+    const fetchPosts = async () => {
+        try{
+            axios.get("http://localhost:3000/api/v1/post/posts")
             .then(response => {
                 setPosts(response.data.posts)
-            })
-            
+            }) 
+        } catch (e) {
+            console.error("Cannot fetch posts !" + e)
+        }
+    }
+
+    useEffect(() => {
+        fetchPosts()
     }, [])
 
     return <div className="mt-8 flex justify-center items center">
@@ -19,7 +26,15 @@ const Posts = ({ isLoggedIn }) => {
 
             {
                 posts.map(post => (
-                    <PostCard key={post._id} postId={post._id} imgSrc={post.contentImg} description={post.content} likeCount={post.likes.length} isLoggedIn={isLoggedIn} />
+                    <PostCard key={post._id} 
+                        username={post.user.firstName} 
+                        postId={post._id} 
+                        imgSrc={post.contentImg} 
+                        description={post.content} 
+                        likeCount={post.likes.length} 
+                        isLoggedIn={isLoggedIn} 
+                        fetchPosts={fetchPosts}
+                    />
                 ))
             }
 

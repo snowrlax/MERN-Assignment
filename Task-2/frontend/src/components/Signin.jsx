@@ -7,10 +7,10 @@ const Signin = () => {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     return <div className="flex items-center justify-center h-screen">
-        <div className="max-w-md bg-white rounded-lg shadow-md p-8">
+        <div className="max-w-md bg-stone-100 rounded-lg shadow-md p-8">
             <h2 className="text-2xl font-semibold text-gray-800 mb-6">Sign In</h2>
             <div>
-                <div className="mb-4">
+                <div className="mb-41">
                     <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>
                     <input onChange={(e) => {
                         setEmail(e.target.value)
