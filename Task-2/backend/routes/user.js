@@ -125,7 +125,7 @@ const updateBody = zod.object({
     lastName: zod.string().optional(),
 })
 
-
+// update user Info
 router.put("/", authMiddleware, async (req, res) => {
     const { success } = updateBody.safeParse(req.body)
     const { password, firstName, lastName } = req.body

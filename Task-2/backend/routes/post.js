@@ -7,9 +7,10 @@ const jwt = require("jsonwebtoken");
 const { JWT_SECRET } = require("../config");
 const { authMiddleware } = require("../middleware");
 
+// get all posts
 router.get('/posts', async (req, res) => {
     try {
-        const posts = await Post.find({})
+        const posts = await Post.find({}).populate('user')
         res.json({
             posts
         })
@@ -59,6 +60,7 @@ const updatePostSchema = zod.object({
     contentImg: zod.string().optional()
 })
 
+// get all of my posts
 router.get('/myposts', authMiddleware, async (req, res) => {
     const userId = req.userId
 

@@ -2,8 +2,12 @@ import React, { useState } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
 
 const Navbar = ({ isLoggedIn, user }) => {
-
   const navigate = useNavigate()
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    window.location.reload(); 
+  };
 
   return (
     <nav className="flex justify-between items-center py-4">
@@ -15,10 +19,7 @@ const Navbar = ({ isLoggedIn, user }) => {
 
               <img src={user.profilePicture} alt="Profile" className="w-8 h-8 rounded-full mr-2" />
               <p className="text-gray-800 text-lg font-semibold">{user.firstName}</p>
-              <button onClick={() => {
-                localStorage.removeItem('token')
-                navigate('/')
-              }} className="bg-red-500 text-white py-2 px-3 mx-3 rounded-md">Log Out</button>
+              <button onClick={handleLogout} className="bg-red-500 text-white py-2 px-3 mx-3 rounded-md">Log Out</button>
             </div>
           </>
         ) : (
