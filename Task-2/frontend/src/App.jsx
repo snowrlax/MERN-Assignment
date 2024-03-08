@@ -16,6 +16,7 @@ function App() {
           <Route path='/signin' element={<Signin />} />
           <Route path='/dashboard' element={<Dashboard />} />
           <Route path='/dashboard/newpost' element={<CreatePost />} />
+          <Route path='/dashboard/editpost' element={<EditPost />} />
         </Routes>
       </BrowserRouter>
     </div>

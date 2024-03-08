@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+
 const CreatePost = () => {
   const [contentImg, setContentImg] = useState("")
   const [content, setContent] = useState("")
