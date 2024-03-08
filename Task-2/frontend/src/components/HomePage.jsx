@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import Navbar from "./Navbar"
-import PostCard from "./PostCard"
 import axios from "axios"
+import Posts from "../pages/Posts"
 
 
 const HomePage = () => {
@@ -18,7 +18,9 @@ const HomePage = () => {
               });
               setUser(response.data);
             } catch (error) {
-                console.log(error)
+                res.status(401).json({
+                  msg: "bad request"
+                })
             } finally {
               setIsLoading(false);
             }
@@ -32,16 +34,7 @@ const HomePage = () => {
 
         <Navbar isLoggedIn={user.isLoggedIn} user={user.userDetails} />
 
-        <div className="mt-8 flex justify-center items center">
-            <div className="grid grid-cols w-5/6 md:w-3/6 lg:w-2/6 gap-y-8">
-
-                <PostCard />
-                <PostCard />
-                <PostCard />
-                <PostCard />
-
-            </div>
-        </div>
+        <Posts isLoggedIn={user.isLoggedIn} />
     </div>
 }
 

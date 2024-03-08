@@ -194,7 +194,7 @@ router.get("/search", async (req, res) => {
 })
 
 // me endpoint
-router.get('/me', async (req, res) => {
+router.get('/me', authMiddleware, async (req, res) => {
     // Get the token from the request headers or query parameters or cookies or wherever you store it
     const token = req.headers.authorization?.split(' ')[1]; // Assuming the token is sent in the 'Authorization' header
   

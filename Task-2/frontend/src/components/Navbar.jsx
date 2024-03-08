@@ -16,6 +16,7 @@ const Navbar = ({ isLoggedIn, user }) => {
               <p className="text-gray-800 text-lg font-semibold">{user.firstName}</p>
               <button onClick={() => {
                 localStorage.removeItem('token')
+                navigate('/')
               }} className="bg-red-500 text-white py-2 px-3 mx-3 rounded-md">Log Out</button>
             </div>
           </>

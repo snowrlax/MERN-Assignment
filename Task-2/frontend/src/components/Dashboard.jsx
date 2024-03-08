@@ -1,16 +1,34 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
 const Dashboard = () => {
-  // Dummy data for posts
-  const [posts, setPosts] = useState([
-    { id: 1, title: 'Post 1', content: 'Content of Post 1' },
-    { id: 2, title: 'Post 2', content: 'Content of Post 2' },
-    { id: 3, title: 'Post 3', content: 'Content of Post 3' }
-  ]);
+  const [posts, setPosts] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("http://localhost:3000/api/v1/post/myposts", {
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("token")
+          }
+        });
+        setPosts(response.data.myposts);
+      } catch (error) {
+        console.error("Error fetching posts:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
 
   // Function to delete a post
   const handleDeletePost = (postId) => {
-    setPosts(posts.filter(post => post.id !== postId));
+    const response = axios.delete(`http://localhost:3000/api/v1/post/delete/${postId}`, {
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("token")
+      }
+    })
   };
 
   return (

@@ -59,6 +59,29 @@ const updatePostSchema = zod.object({
     contentImg: zod.string().optional()
 })
 
+router.get('/myposts', authMiddleware, async (req, res) => {
+    const userId = req.userId
+
+    try{
+        const myposts = await Post.find({
+            user: userId 
+        });
+
+        if(!myposts)  {
+            res.json({
+                msg: "No posts found, create new Post!"
+            })
+        }
+        res.json({
+            myposts
+        })
+    } catch(e) {
+        res.status(400).json({
+            msg: "Cannot find posts.."
+        })
+    }
+})
+
 // Update an existing post
 router.put('/myposts/:postId', authMiddleware, async (req, res) => {
     const { postId } = req.params;
@@ -112,7 +135,7 @@ router.delete('/delete/:postId', authMiddleware, async (req, res) => {
         const post = await Post.findOne({
             _id: postId
         });
-
+        console.log(post)
         // Check if the post exists
         if (!post) {
             return res.status(404).json({ error: 'Post not found.' });
@@ -140,7 +163,7 @@ router.post('/like/:postId', authMiddleware, async (req, res) => {
     const userId = req.userId;
 
     try {
-        const post = await Post.find({
+        const post = await Post.findOne({
             _id: postId
         });
 
