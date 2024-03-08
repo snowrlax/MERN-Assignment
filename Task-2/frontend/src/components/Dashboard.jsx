@@ -6,20 +6,21 @@ import DashboardPost from './DashboardPost';
 const Dashboard = () => {
   const [posts, setPosts] = useState([]);
   const navigate = useNavigate()
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get("http://localhost:3000/api/v1/post/myposts", {
-          headers: {
-            Authorization: "Bearer " + localStorage.getItem("token")
-          }
-        });
-        setPosts(response.data.myposts);
-      } catch (error) {
-        console.error("Error fetching posts:", error);
-      }
-    };
 
+  const fetchData = async () => {
+    try {
+      const response = await axios.get("http://localhost:3000/api/v1/post/myposts", {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token")
+        }
+      });
+      setPosts(response.data.myposts);
+    } catch (error) {
+      console.error("Error fetching posts:", error);
+    }
+  };
+
+  useEffect(() => {
     fetchData();
   }, []);
 
@@ -39,7 +40,7 @@ const Dashboard = () => {
       {/* Posts section */}
       <div className="space-y-4">
         {posts.map(post => (
-          <DashboardPost key={post._id} postId={post._id} content={post.content} />
+          <DashboardPost key={post._id} postId={post._id} content={post.content} handleDeletePost={handleDeletePost} fetchData={fetchData} />
         ))}
       </div>
     </div>
