@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import DashboardPost from './DashboardPost';
+import DashboardPost from '../components/DashboardPost';
 
 const Dashboard = () => {
   const [posts, setPosts] = useState([]);
@@ -38,7 +38,13 @@ const Dashboard = () => {
       {/* Posts section */}
       <div className="space-y-4">
         {posts.map(post => (
-          <DashboardPost key={post._id} postId={post._id} content={post.content} handleDeletePost={handleDeletePost} fetchData={fetchData} />
+          <DashboardPost 
+            key={post._id} 
+            postId={post._id} 
+            content={post.content} 
+            handleDeletePost={handleDeletePost} 
+            fetchData={fetchData} 
+          />
         ))}
       </div>
     </div>

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import PostCard from "../components/PostCard"
+import PostCard from "./PostCard"
 import axios from "axios"
 
 const Posts = ({ isLoggedIn }) => {

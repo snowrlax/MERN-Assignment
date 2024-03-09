@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
-import Navbar from "./Navbar"
+import Navbar from "../components/Navbar"
 import axios from "axios"
-import Posts from "../pages/Posts"
+import Posts from "../components/Posts"
 
 
 const HomePage = () => {

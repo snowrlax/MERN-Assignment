@@ -1,10 +1,10 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css'
-import HomePage from './components/HomePage';
-import Signup from './components/Signup';
-import Signin from './components/Signin';
-import CreatePost from './components/CreatePost';
-import Dashboard from './components/Dashboard';
+import HomePage from './pages/HomePage';
+import Signup from './pages/Signup';
+import Signin from './pages/Signin';
+import CreatePost from './pages/CreatePost';
+import Dashboard from './pages/Dashboard';
 
 function App() {
   return (
