@@ -5,6 +5,7 @@ import Signup from './pages/Signup';
 import Signin from './pages/Signin';
 import CreatePost from './pages/CreatePost';
 import Dashboard from './pages/Dashboard';
+import EditPost from './pages/EditPost';
 
 function App() {
   return (
