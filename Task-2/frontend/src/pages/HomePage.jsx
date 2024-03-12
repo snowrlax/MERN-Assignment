@@ -11,7 +11,7 @@ const HomePage = () => {
     useEffect(() => {
         const fetchUserDetails = async () => {
             try {
-              const response = await axios.get('http://localhost:3000/api/v1/user/me', {
+              const response = await axios.get(`${process.env.DATABASE_URL}/api/v1/user/me`, {
                 headers: {
                     Authorization: "Bearer " + localStorage.getItem("token")
                 }

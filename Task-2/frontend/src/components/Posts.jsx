@@ -8,7 +8,7 @@ const Posts = ({ isLoggedIn }) => {
 
     const fetchPosts = async () => {
         try{
-            axios.get("http://localhost:3000/api/v1/post/posts")
+            axios.get(`${process.env.DATABASE_URL}/api/v1/post/posts`)
             .then(response => {
                 setPosts(response.data.posts)
             }) 

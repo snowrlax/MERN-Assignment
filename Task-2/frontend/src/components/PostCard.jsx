@@ -21,7 +21,7 @@ const PostCard = ({
         {
             isLoggedIn ?
                 <button onClick={() => {
-                    axios.post(`http://localhost:3000/api/v1/post/like/${postId}`,
+                    axios.post(`${process.env.DATABASE_URL}/api/v1/post/like/${postId}`,
                         null,
                         {
                             headers: {

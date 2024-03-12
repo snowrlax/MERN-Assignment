@@ -7,7 +7,7 @@ const Dashboard = () => {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get("http://localhost:3000/api/v1/post/myposts", {
+      const response = await axios.get(`${process.env.DATABASE_URL}/api/v1/post/myposts`, {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("token")
         }
@@ -25,7 +25,7 @@ const Dashboard = () => {
 
   // Function to delete a post
   const handleDeletePost = (postId) => {
-    const response = axios.delete(`http://localhost:3000/api/v1/post/delete/${postId}`, {
+    const response = axios.delete(`${process.env.DATABASE_URL}/api/v1/post/delete/${postId}`, {
       headers: {
         Authorization: "Bearer " + localStorage.getItem("token")
       }
