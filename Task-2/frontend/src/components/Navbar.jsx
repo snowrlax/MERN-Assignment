@@ -11,7 +11,7 @@ const Navbar = ({ isLoggedIn, user }) => {
 
   return (
     <nav className="flex justify-between items-center py-4">
-      <h1 className="text-2xl font-bold text-gray-800">Social Media</h1>
+      <h1 className="text-2xl font-bold text-gray-800">Animal Media</h1>
       <div>
         {isLoggedIn ? (
           <>
