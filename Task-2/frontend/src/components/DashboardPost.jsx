@@ -1,4 +1,8 @@
+import { useNavigate } from "react-router-dom"
+
+
 const DashboardPost = ({ postId, title, content, handleDeletePost, fetchData }) => {
+    const navigate = useNavigate()
 
     return <div className="">
         <div className="bg-white rounded-lg shadow-md p-4 flex justify-between items-center">
@@ -7,7 +11,9 @@ const DashboardPost = ({ postId, title, content, handleDeletePost, fetchData }) 
                 <p className="text-gray-600">{content}</p>
             </div>
             <div>
-                <button className="bg-blue-500 text-white px-4 py-2 rounded-md mr-2 hover:bg-blue-600 focus:outline-none focus:bg-blue-600">Edit</button>
+                <button onClick={() => {
+                    navigate(`/dashboard/editpost/${postId}`)
+                }} className="bg-blue-500 text-white px-4 py-2 rounded-md mr-2 hover:bg-blue-600 focus:outline-none focus:bg-blue-600">Edit</button>
                 <button onClick={() => {
                     handleDeletePost(postId)
                     fetchData()
