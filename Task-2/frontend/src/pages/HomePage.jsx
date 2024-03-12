@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import Navbar from "../components/Navbar"
 import axios from "axios"
 import Posts from "../components/Posts"
-
+import { DATABASE_URL } from '../../config'
 
 const HomePage = () => {
     const [user, setUser] = useState({})
@@ -11,16 +11,14 @@ const HomePage = () => {
     useEffect(() => {
         const fetchUserDetails = async () => {
             try {
-              const response = await axios.get(`${process.env.DATABASE_URL}/api/v1/user/me`, {
+              const response = await axios.get(`${DATABASE_URL}/api/v1/user/me`, {
                 headers: {
                     Authorization: "Bearer " + localStorage.getItem("token")
                 }
               });
               setUser(response.data);
             } catch (error) {
-                res.status(401).json({
-                  msg: "bad request"
-                })
+                console.error("message: " + error.message)
             } finally {
               setIsLoading(false);
             }

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import PostCard from "./PostCard"
 import axios from "axios"
+import { DATABASE_URL } from '../../config'
 
 const Posts = ({ isLoggedIn }) => {
 
@@ -8,7 +9,7 @@ const Posts = ({ isLoggedIn }) => {
 
     const fetchPosts = async () => {
         try{
-            axios.get(`${process.env.DATABASE_URL}/api/v1/post/posts`)
+            axios.get(`${DATABASE_URL}/api/v1/post/posts`)
             .then(response => {
                 setPosts(response.data.posts)
             }) 

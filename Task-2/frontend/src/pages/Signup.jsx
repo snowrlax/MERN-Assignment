@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from 'axios'
+import { DATABASE_URL } from '../../config'
 
 const Signup = () => {
     const [firstName, setFirstName] = useState("");
@@ -38,7 +39,7 @@ const Signup = () => {
                     }} type="password" id="password" name="password" className="mt-1 px-4 py-2 w-full border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500 shadow-sm" />
                 </div>
                 <button onClick={async () => {
-                    const response = await axios.post(`${process.env.DATABASE_URL}/api/v1/user/signup`, {
+                    const response = await axios.post(`${DATABASE_URL}/api/v1/user/signup`, {
                         firstName,
                         lastName,
                         email,

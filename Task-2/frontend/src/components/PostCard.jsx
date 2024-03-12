@@ -1,5 +1,6 @@
 import axios from "axios"
 import { useNavigate } from "react-router-dom"
+import { DATABASE_URL } from '../../config'
 
 const PostCard = ({ 
     postId, 
@@ -21,7 +22,7 @@ const PostCard = ({
         {
             isLoggedIn ?
                 <button onClick={() => {
-                    axios.post(`${process.env.DATABASE_URL}/api/v1/post/like/${postId}`,
+                    axios.post(`${DATABASE_URL}/api/v1/post/like/${postId}`,
                         null,
                         {
                             headers: {
