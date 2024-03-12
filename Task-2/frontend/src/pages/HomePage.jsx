@@ -31,8 +31,11 @@ const HomePage = () => {
     return <div className="container mx-auto px-4 py-6">
 
         <Navbar isLoggedIn={user.isLoggedIn} user={user.userDetails} />
+        {isLoading ? 
+          <h3 className="">Loading...</h3> :
+          <Posts isLoggedIn={user.isLoggedIn} />
+        }
 
-        <Posts isLoggedIn={user.isLoggedIn} />
     </div>
 }
 
